@@ -1,17 +1,31 @@
 <script setup lang="ts">
-defineProps<{
+import { storeToRefs } from 'pinia'
+import { useCounterStore } from '@/stores/counter'
+
+const props = defineProps<{
   msg: string
 }>()
+
+// Use Pinia counter store
+const counter = useCounterStore()
+const { count, doubleCount } = storeToRefs(counter)
+const { increment } = counter
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">{{ props.msg }}</h1>
     <h3>
       You’ve successfully created a project with
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
     </h3>
+
+    <div class="counter">
+      <p>Count: {{ count }}</p>
+      <p>Double: {{ doubleCount }}</p>
+      <button type="button" @click="increment">Increment</button>
+    </div>
   </div>
 </template>
 
