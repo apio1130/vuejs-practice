@@ -13,10 +13,10 @@ export const usePostsStore = defineStore('posts', () => {
   const posts = ref([
     {id: 1, title: 'Post 1', content: 'Content 1', createdAt: new Date(), updatedAt: new Date() },
     {id: 2, title: 'Post 2', content: 'Content 2', createdAt: new Date(), updatedAt: new Date() },
-  ]);
+  ])
 
   function getPost(id: number): Post | undefined {
-    return posts.value.find(p => p.id === id);
+    return posts.value.find(p => p.id === id)
   }
 
   function addPost(title: string, content: string) {
@@ -27,17 +27,17 @@ export const usePostsStore = defineStore('posts', () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    posts.value.push(newPost);
+    posts.value.push(newPost)
   }
 
   function updatePost(id: number, title: string, content: string) {
     const post = posts.value.find(p => p.id === id);
     if (post) {
-      post.title = title;
-      post.content = content;
-      post.updatedAt = new Date();
+      post.title = title
+      post.content = content
+      post.updatedAt = new Date()
     }
   }
 
-  return { posts, getPost, addPost, updatePost };
-});
+  return { posts, getPost, addPost, updatePost }
+})

@@ -74,4 +74,21 @@ describe('Posts Store', () => {
 
     expect(store.posts).toEqual(initialPosts); // posts 배열이 변경되지 않아야 함
   });
+
+  // getPost 메서드 테스트 추가
+  it('getPost 메서드가 존재하는 게시물을 올바르게 반환한다', () => {
+    const store = usePostsStore();
+    const existingPost = store.getPost(1);
+
+    expect(existingPost).toBeDefined();
+    expect(existingPost?.id).toBe(1);
+    expect(existingPost?.title).toBe('Post 1');
+  });
+
+  it('getPost 메서드가 존재하지 않는 게시물에 대해 undefined를 반환한다', () => {
+    const store = usePostsStore();
+    const nonExistentPost = store.getPost(999); // 존재하지 않는 ID
+
+    expect(nonExistentPost).toBeUndefined();
+  });
 });
