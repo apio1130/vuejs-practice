@@ -3,16 +3,28 @@ defineProps({
   id: Number,
   title: String,
   content: String,
-  createdAt: String,
-  updatedAt: String,
+  createdAt: Date,
+  updatedAt: Date,
 })
+
+function formatDate(date: Date | undefined | null) {
+  if (!date) return ''
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  })
+}
 </script>
 
 <template>
   <router-link :to="`/posts/${id}`" class="post-list-item">
     <h3>{{title}}</h3>
-    <p>{{createdAt}}</p>
-    <p>{{updatedAt}}</p>
+    <p>{{formatDate(createdAt)}}</p>
+    <p>{{formatDate(updatedAt)}}</p>
   </router-link>
 </template>
 
