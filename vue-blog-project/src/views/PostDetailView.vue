@@ -18,13 +18,26 @@ function moveUpdate() {
     router.push(`/posts/${post.value.id}/update`)
   }
 }
+
+function formatDate(date: Date | undefined | null) {
+  if (!date) return ''
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true
+  })
+}
 </script>
 
 <template>
 <div v-if="post">
   <h1>{{ post.title }}</h1>
-  <p>작성일: {{ post.createdAt }}</p>
-  <p>수정일: {{ post.updatedAt }}</p>
+  <p>작성일: {{ formatDate(post.createdAt) }}</p>
+  <p>수정일: {{ formatDate(post.updatedAt) }}</p>
   <div>{{ post.content}}</div>
   <button @click="moveUpdate">수정하기</button>
 </div>
